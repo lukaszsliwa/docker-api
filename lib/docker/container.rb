@@ -322,10 +322,10 @@ class Docker::Container
     end
   end
 
-  def store_file(path, file_content)
+  def store_file(path, file_content, permissions = 0640)
     output_io = StringIO.new(
       Docker::Util.create_tar(
-        path => file_content
+        path => { content: file_content, permissions: permissions }
       )
     )
 
